@@ -384,10 +384,10 @@ class Model(nn.Module):
 
     def predict(
         self,
-        source: Union[str, Path, int, list, tuple, np.ndarray, torch.Tensor] = None,
-        stream: bool = False,
-        predictor=None,
-        **kwargs,
+            source: Union[str, Path, int, list, tuple, np.ndarray, torch.Tensor] = None,
+            stream: bool = False,
+            predictor: object = None,
+            **kwargs: object,
     ) -> list:
         """
         Performs predictions on the given image source using the YOLO model.

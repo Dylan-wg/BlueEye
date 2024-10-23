@@ -1,3 +1,5 @@
+from PIL.Image import Image
+
 from ultralytics import YOLOv10
 
 
@@ -22,3 +24,7 @@ class Model:
             else:
                 break
         return rt
+
+    def predict_img(self, img: Image) -> Image:
+        result = self.model(img)
+        result[0].save("./runs/detect/predict/v.jpg")
