@@ -1,8 +1,6 @@
 import threading
 from tkinter import filedialog, ttk
-
 import cv2
-
 from Model import Model
 import tkinter as tk
 from PIL import Image, ImageTk
@@ -18,6 +16,7 @@ class Main_Window:
         self.label = tk.Label(self.root)
         self.uploading_img = False
         self.playing_vd = False
+        self.vd_start = False
 
     def render(self):
         self.root.title(self.title)
@@ -34,6 +33,9 @@ class Main_Window:
         frame_vd = ttk.Frame(notebook)
         notebook.add(frame_vd, text="Upload videos")
 
+        frame_about = ttk.Frame(notebook)
+        notebook.add(frame_about, text="About")
+
         upload_img_button = tk.Button(frame_img, text='Upload', command=self.upload_image)
         upload_img_button.pack()
 
@@ -45,6 +47,15 @@ class Main_Window:
 
         pred_vd_button = tk.Button(frame_vd, text="Start", command=self.predict_vd)
         pred_vd_button.pack()
+
+        about_label = tk.Label(frame_about, text="Group Work of "
+                                                 "Group 7, Global Challenge I, Hong Kong Baptist University\n"
+                                                 "Co-developers: Dylan, Tim\n"
+                                                 "Group Leader: Dylan\n"
+                                                 "Group Members: Carson, Kyra, Thomas, Tim, Violet\n"
+                                                 "Repository: https://github.com/Dylan-wg/GarbageRecognition\n"
+                                                 "All rights reserved.")
+        about_label.pack()
 
         self.root.mainloop()
 
@@ -93,7 +104,7 @@ class Main_Window:
 
             def update_frame():
                 ret, frame = cap.read()
-                if ret and (not self.uploading_img):
+                if ret and (not self.uploading_img) and (not self.vd_start):
                     self.playing_vd = True
                     frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
                     img = Image.fromarray(frame)
@@ -104,6 +115,7 @@ class Main_Window:
                     self.label.after(10, update_frame)
                 else:
                     cap.release()
+                    self.vd_start = False
                     self.playing_vd = False
                     self.uploading_img = False
 
@@ -111,6 +123,8 @@ class Main_Window:
         return file_path
 
     def predict_vd(self):
+        self.vd_start = True
+
         def _predict_vd():
             file_path = self.path
             if file_path:
@@ -124,6 +138,9 @@ class Main_Window:
                         img = Image.fromarray(frame)
 
                         self.model.predict_img(img)
+                        # new_thread = threading.Thread(target=self.model.predict_img, args=[img])
+                        # new_thread.start()
+                        # new_thread.join()
                         img = Image.open("./runs/detect/predict/v.jpg")
 
                         img = self.resize_image(img)
@@ -140,3 +157,4 @@ class Main_Window:
 
         new_thread = threading.Thread(target=_predict_vd)
         new_thread.start()
+        # _predict_vd()
