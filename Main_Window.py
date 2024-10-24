@@ -20,7 +20,7 @@ class Main_Window:
 
     def render(self):
         self.root.title(self.title)
-        self.root.geometry("800x600")
+        self.root.geometry("800x800")
 
         self.label.pack()
 
@@ -61,8 +61,8 @@ class Main_Window:
 
     def upload_image(self) -> str:
         file_path = filedialog.askopenfilename(filetypes=[("Image Files", "*.png;*.jpg;*.jpeg;*.bmp")])
-        self.path = file_path
         if file_path:
+            self.path = file_path
             self.label.pack()
             image = Image.open(file_path)
             image = self.resize_image(image)

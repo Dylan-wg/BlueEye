@@ -1,12 +1,11 @@
 from PIL.Image import Image
-
 from ultralytics import YOLOv10
 
 
 class Model:
 
     def __init__(self):
-        self.model = YOLOv10("./runs/detect/train11/weights/best.pt")
+        self.model = YOLOv10("./runs/detect/train13/weights/best.pt")
 
     def predict(self, path: str) -> str:
         result = self.model.predict(path)
