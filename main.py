@@ -1,5 +1,5 @@
 #
-# Group Work of Group 7, Global Challenge I, Hong Kong Baptist University
+# Group Project of Group 7, Global Challenge I, Hong Kong Baptist University
 #
 # Co-developers: Dylan, Tim
 #
