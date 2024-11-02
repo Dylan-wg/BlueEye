@@ -7,7 +7,8 @@ class Multilingual_interface:
         self.texts: dict = {
             ENGLISH: "",
             SIMPLIFIED_CHINESE: "",
-            TRADITIONAL_CHINESE: ""
+            TRADITIONAL_CHINESE: "",
+            GERMAN: ""
         }
 
     def set_lang(self, lang: str):
