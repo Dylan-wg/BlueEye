@@ -1,5 +1,6 @@
 #
 # Group Project of Group 7, Global Challenge I, Hong Kong Baptist University
+# Project Name: Blue Eye
 #
 # Co-developers: Dylan, Tim
 #
