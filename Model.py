@@ -28,6 +28,6 @@ class Model:
                 break
         return rt
 
-    def predict_img(self, img: Image) -> Image:
+    def predict_img(self, img: Image):
         result = self.model(img)
         result[0].save("./runs/detect/predict/v.jpg")
